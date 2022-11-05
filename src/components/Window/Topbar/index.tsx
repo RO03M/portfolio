@@ -1,0 +1,29 @@
+import { Box } from "@mui/material";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
+
+import HorizontalRuleSharpIcon from '@mui/icons-material/HorizontalRuleSharp';
+import CropSquareSharpIcon from '@mui/icons-material/CropSquareSharp';
+
+export const Topbar = (props: any) => {
+
+    useEffect(() => {
+        document.addEventListener("mouseup", () => document.body.style.cursor = "inherit");
+        return () => document.removeEventListener("mouseup", () => document.body.style.cursor = "inherit");
+    }, []);
+
+    return (
+        <Box
+            component={motion.div}
+            sx={{
+                width: "100%",
+                height: 25,
+                backgroundColor: "primary.main"
+            }}
+            onMouseDown={() => document.body.style.cursor = "grabbing"}
+            {...props}
+        >
+            
+        </Box>
+    );
+}
