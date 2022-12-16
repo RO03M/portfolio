@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { clamp } from "../../helpers/clamp";
 
-export const useDragHandlers = () => {
+export const useWindow = () => {
 
     const [height, setHeight] = useState<number>(200);
     const [width, setWidth] = useState<number>(200);
     const [top, setTop] = useState<number>(0);
     const [left, setLeft] = useState<number>(0);
-
+    const resizeBarWidth = 10;
+    const resizeBarHeight = 10;
+    
     //TODO remove clamp as limiter, or check before changing top and left
     const handleBottomDrag = (event: any, info: any) => {
         setHeight(clamp(height + info.delta.y, 200));
@@ -61,6 +63,8 @@ export const useDragHandlers = () => {
         height,
         top,
         left,
+        resizeBarWidth,
+        resizeBarHeight,
         handleBottomDrag,
         handleLeftDrag,
         handleRightDrag,
@@ -68,6 +72,6 @@ export const useDragHandlers = () => {
         handleTopLeftDrag,
         handleTopRightDrag,
         handleBottomRightDrag,
-        handleBottomLeftDrag
+        handleBottomLeftDrag,
     };
 }

@@ -4,16 +4,22 @@ import { PointerEvent, RefObject, useCallback, useEffect, useId, useRef, useStat
 import { useOSStore } from "../../stores";
 import { Resizable } from "../Resizable";
 import { Topbar } from "./Topbar";
-import { useDragHandlers } from "./useDragHandlers";
+import { useWindow } from "./useWindow";
 
 interface IWindow {
     osRef: RefObject<HTMLDivElement>;
+    x: number;
+    y: number;
+    id: number;
 }
 
 export const Window = (props: IWindow) => {
 
     const {
         osRef,
+        x,
+        y,
+        id
     } = props;
 
     const {
@@ -29,9 +35,7 @@ export const Window = (props: IWindow) => {
         handleTopRightDrag,
         handleBottomRightDrag,
         handleBottomLeftDrag
-    } = useDragHandlers();
-
-    const id = useId();
+    } = useWindow();
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     
