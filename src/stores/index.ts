@@ -14,6 +14,7 @@ interface OSState {
     debugMode: boolean;
     toggleDebug: () => void;
     updateWindow: (id: number, configs: Partial<WindowsStoreInfos>) => void;
+    closeWindow: (windowId: number) => void;
     windows: WindowsStoreInfos[];
 }
 
@@ -33,6 +34,15 @@ export const useOSStore = create<OSState>()((set) => ({
             if (windowIndex !== undefined && configs?.x) tempWindows[windowIndex].x = configs.x;
             if (windowIndex !== undefined && configs?.y) tempWindows[windowIndex].y = configs.y;
             if (windowIndex !== undefined && configs?.hidden) tempWindows[windowIndex].hidden = configs.hidden;
+            
+            return {
+                windows: tempWindows
+            };
+        })
+    ),
+    closeWindow: (windowId: number) => (
+        set((state) => {
+            const tempWindows = state.windows.filter(window => window.id !== windowId);
             console.log(tempWindows);
             return {
                 windows: tempWindows
@@ -45,6 +55,12 @@ export const useOSStore = create<OSState>()((set) => ({
             x: 100,
             y: 100,
             hidden: false
-        }
+        },
+        {
+            id: 1,
+            x: 100,
+            y: 100,
+            hidden: false
+        },
     ]
 }));

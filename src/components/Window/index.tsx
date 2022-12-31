@@ -10,7 +10,7 @@ interface IWindow {
     osRef: RefObject<HTMLDivElement>;
     x: number;
     y: number;
-    id: number;
+    windowId: number;
 }
 
 export const Window = (props: IWindow) => {
@@ -19,7 +19,7 @@ export const Window = (props: IWindow) => {
         osRef,
         x,
         y,
-        id
+        windowId
     } = props;
 
     const {
@@ -47,7 +47,7 @@ export const Window = (props: IWindow) => {
 
     return (
         <Box
-            id={`${id}-window`}
+            id={`${windowId}-window`}
             component={motion.div}
             style={{
                 width: width,
@@ -218,6 +218,7 @@ export const Window = (props: IWindow) => {
             />
             <Topbar
                 onPointerDown={startDrag}
+                windowId={windowId}
             />
             <Paper
                 sx={{

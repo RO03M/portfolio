@@ -1,12 +1,27 @@
+import React, { useEffect } from "react";
 import { Box, ButtonBase } from "@mui/material";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 
 import HorizontalRuleSharpIcon from '@mui/icons-material/HorizontalRuleSharp';
 import CropSquareSharpIcon from '@mui/icons-material/CropSquareSharp';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTopbar } from "./useTopbar";
 
-export const Topbar = (props: any) => {
+interface TopbarProp {
+    onPointerDown: React.PointerEventHandler<HTMLDivElement>;
+    windowId: number;
+}
+
+export const Topbar = (props: TopbarProp) => {
+
+    const {
+        handleCloseClick
+    } = useTopbar();
+
+    const {
+        windowId,
+        ...others
+    } = props;
 
     useEffect(() => {
         document.addEventListener("mouseup", () => document.body.style.cursor = "inherit");
@@ -24,8 +39,9 @@ export const Topbar = (props: any) => {
                 justifyContent: "flex-end"
             }}
             onMouseDown={() => document.body.style.cursor = "grabbing"}
-            {...props}
+            {...others}
         >
+            <p>{windowId}</p>
             <ButtonBase>
                 <HorizontalRuleSharpIcon
                     sx={{
@@ -40,7 +56,9 @@ export const Topbar = (props: any) => {
                     }}
                 />
             </ButtonBase>
-            <ButtonBase>
+            <ButtonBase
+                onClick={() => handleCloseClick(windowId)}
+            >
                 <CloseIcon
                     sx={{
                         color: "black"

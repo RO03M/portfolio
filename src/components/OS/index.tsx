@@ -10,7 +10,7 @@ const OS = () => {
     
     const osRef = useRef<HTMLDivElement>(null);
     const windows = useOSStore((store) => store.windows);
-
+    
     return (
         <Box
             className={styles.os}
@@ -22,21 +22,15 @@ const OS = () => {
                 backgroundSize: "cover"
             }}
         >
-            <Window
-                osRef={osRef}
-                id={0}
-                x={0}
-                y={0}
-            />
-            {/* {windows?.map((windows, key) => !windows.hidden && (
+            {windows?.map((windows, key) => !windows.hidden && (
                 <Window
-                    key={key}
+                    key={windows.id}
                     osRef={osRef}
                     x={windows.x}
                     y={windows.y}
-                    id={windows.id}
+                    windowId={windows.id}
                 />
-            ))} */}
+            ))}
         </Box>
     );
 }
