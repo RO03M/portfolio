@@ -3,17 +3,26 @@ import { useOSStore } from "./stores";
 import OS from "./components/OS";
 
 import "./index.css";
+import ReactHotkeys from "react-hot-keys";
 
 const App = () => {
 
 	const theme = createTheme(useOSStore((store) => store.theme));
 
+	const toggleDebug = useOSStore((store) => store.toggleDebug);
+
 	return (
-		<ThemeProvider
-			theme={theme}
+		<ReactHotkeys
+			keyName={"alt+f3"}
+			onKeyDown={toggleDebug}
+
 		>
-			<OS/>
-		</ThemeProvider>
+			<ThemeProvider
+				theme={theme}
+			>
+				<OS/>
+			</ThemeProvider>
+		</ReactHotkeys>
 	);
 }
 

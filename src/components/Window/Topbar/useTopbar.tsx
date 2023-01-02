@@ -1,11 +1,11 @@
-import { useOSStore } from "../../../stores";
+import { useAppsStore } from "../../../stores/apps";
 
 export const useTopbar = () => {
 
-    const closeWindow = useOSStore((store) => store.closeWindow);
+    const closeWindow = useAppsStore((store) => store.closeWindow);
 
-    const handleCloseClick = (windowId: number) => {
-        closeWindow(windowId);
+    const handleCloseClick = (appId: number) => {
+        closeWindow(appId);
     }
 
     return {

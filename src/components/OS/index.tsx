@@ -1,16 +1,17 @@
 import { Box, Paper } from "@mui/material";
 import { Window } from "../Window";
 import { useRef } from "react";
+import { Dock } from "../Dock";
+import { useAppsStore } from "../../stores/apps";
 
 import mainBackground from "../../assets/images/mainBackground.jpeg";
 import styles from "./index.module.css";
-import { useOSStore } from "../../stores";
 
 const OS = () => {
     
     const osRef = useRef<HTMLDivElement>(null);
-    const windows = useOSStore((store) => store.windows);
-    
+    const apps = useAppsStore((store) => store.apps);
+
     return (
         <Box
             className={styles.os}
@@ -22,15 +23,16 @@ const OS = () => {
                 backgroundSize: "cover"
             }}
         >
-            {windows?.map((windows, key) => !windows.hidden && (
+            {apps?.map((app, key) => !app.hidden && (
                 <Window
-                    key={windows.id}
+                    key={app.id}
                     osRef={osRef}
-                    x={windows.x}
-                    y={windows.y}
-                    windowId={windows.id}
+                    x={app.x}
+                    y={app.y}
+                    appId={app.id}
                 />
             ))}
+            <Dock/>
         </Box>
     );
 }
