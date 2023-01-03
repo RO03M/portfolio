@@ -4,7 +4,10 @@ import { Stacks, useDockSettingsStore } from "../../stores/dockSettings";
 
 export const useRenderApps = () => {
 
-    const apps = useAppsStore((store) => store.apps);
+    const {
+        apps,
+        toggleWindowVisibility
+    } = useAppsStore((store) => store);
     const dockSettings = useDockSettingsStore(store => store);
     const theme = useTheme();
 
@@ -21,6 +24,7 @@ export const useRenderApps = () => {
         <Button
             key={app.id}
             color={"primary"}
+            onClick={() => toggleWindowVisibility(app.id)}
             sx={{
                 textTransform: "none"
             }}

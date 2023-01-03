@@ -2,13 +2,17 @@ import { useAppsStore } from "../../../stores/apps";
 
 export const useTopbar = () => {
 
-    const closeWindow = useAppsStore((store) => store.closeWindow);
+    const {
+        closeWindow,
+        toggleWindowVisibility
+    } = useAppsStore((store) => store);
 
-    const handleCloseClick = (appId: number) => {
-        closeWindow(appId);
-    }
+    const handleCloseClick = (appId: number) => closeWindow(appId);
+
+    const handleMinimizeClick = (appId: number) => toggleWindowVisibility(appId, true);
 
     return {
-        handleCloseClick
+        handleCloseClick,
+        handleMinimizeClick
     };
 }

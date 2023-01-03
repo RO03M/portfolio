@@ -3,7 +3,7 @@ import { useOSStore } from "./stores";
 import OS from "./components/OS";
 
 import "./index.css";
-import ReactHotkeys from "react-hot-keys";
+import { useHotkeys } from "react-hotkeys-hook";
 
 const App = () => {
 
@@ -11,18 +11,14 @@ const App = () => {
 
 	const toggleDebug = useOSStore((store) => store.toggleDebug);
 
-	return (
-		<ReactHotkeys
-			keyName={"alt+f3"}
-			onKeyDown={toggleDebug}
+	useHotkeys("shift+d", toggleDebug);
 
+	return (
+		<ThemeProvider
+			theme={theme}
 		>
-			<ThemeProvider
-				theme={theme}
-			>
-				<OS/>
-			</ThemeProvider>
-		</ReactHotkeys>
+			<OS/>
+		</ThemeProvider>
 	);
 }
 

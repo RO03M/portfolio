@@ -18,22 +18,35 @@ interface App {
 interface AppsState {
     apps: App[];
     updateWindow: (id: number, configs: Partial<App>) => void;
+    toggleWindowVisibility: (appId: number, hidden?: boolean) => void;
     closeWindow: (appId: number) => void;
 }
 
 export const useAppsStore = create<AppsState>((set) => ({
     updateWindow: (id: number, configs: Partial<App>) => (
         set((state) => {
-            const tempApp = state.apps;
-            const appIndex = tempApp?.findIndex((x) => x?.id === id);
+            const tempApps = state.apps;
+            const appIndex = tempApps?.findIndex((x) => x?.id === id);
 
-            if (appIndex !== undefined && configs?.x) tempApp[appIndex].x = configs.x;
-            if (appIndex !== undefined && configs?.y) tempApp[appIndex].y = configs.y;
-            if (appIndex !== undefined && configs?.hidden) tempApp[appIndex].hidden = configs.hidden;
+            if (appIndex !== undefined && configs?.x) tempApps[appIndex].x = configs.x;
+            if (appIndex !== undefined && configs?.y) tempApps[appIndex].y = configs.y;
+            if (appIndex !== undefined && configs?.hidden) tempApps[appIndex].hidden = configs.hidden;
             
             return {
-                apps: tempApp
+                apps: [...tempApps]
             };
+        })
+    ),
+    toggleWindowVisibility: (appId: number, hidden?: boolean) => (
+        set((state) => {
+            const appIndex = state.apps.findIndex(app => app.id === appId);
+            const tempApps = state.apps
+            if (hidden !== undefined) tempApps[appIndex].hidden = hidden;
+            else tempApps[appIndex].hidden = !tempApps[appIndex].hidden;
+            
+            return {
+                apps: [...tempApps]
+            }
         })
     ),
     closeWindow: (appId: number) => (
@@ -41,7 +54,7 @@ export const useAppsStore = create<AppsState>((set) => ({
             const tempApps = state.apps.filter(app => app.id !== appId);
             
             return {
-                apps: tempApps
+                apps: [...tempApps]
             };
         })
     ),

@@ -16,7 +16,8 @@ interface TopbarProp {
 export const Topbar = (props: TopbarProp) => {
 
     const {
-        handleCloseClick
+        handleCloseClick,
+        handleMinimizeClick
     } = useTopbar();
 
     const {
@@ -55,7 +56,7 @@ export const Topbar = (props: TopbarProp) => {
                 </Typography>
             </Box>
             <Box>
-                <ButtonBase>
+                <ButtonBase onClick={() => handleMinimizeClick(appId)}>
                     <HorizontalRuleSharpIcon
                         sx={{
                             color: "black"

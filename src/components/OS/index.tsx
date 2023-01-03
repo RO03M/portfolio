@@ -11,7 +11,7 @@ const OS = () => {
     
     const osRef = useRef<HTMLDivElement>(null);
     const apps = useAppsStore((store) => store.apps);
-
+    
     return (
         <Box
             className={styles.os}
@@ -23,13 +23,14 @@ const OS = () => {
                 backgroundSize: "cover"
             }}
         >
-            {apps?.map((app, key) => !app.hidden && (
+            {apps?.map((app) => !app.hidden && (
                 <Window
                     key={app.id}
                     osRef={osRef}
                     x={app.x}
                     y={app.y}
                     appId={app.id}
+                    data-hidden={app.hidden}
                 />
             ))}
             <Dock/>
