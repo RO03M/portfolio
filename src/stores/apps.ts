@@ -1,6 +1,6 @@
 import create from "zustand";
 
-enum AppTypes {
+export enum AppTypes {
     Folder,
     TextEditor
 }

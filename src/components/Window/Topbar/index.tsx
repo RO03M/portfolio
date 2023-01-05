@@ -48,7 +48,8 @@ export const Topbar = (props: TopbarProp) => {
             <Box
                 sx={{
                     flex: 1,
-                    marginLeft: 1
+                    marginLeft: 1,
+                    userSelect: "none"
                 }}
             >
                 <Typography>

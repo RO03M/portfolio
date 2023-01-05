@@ -6,6 +6,7 @@ import { useAppsStore } from "../../stores/apps";
 
 import mainBackground from "../../assets/images/mainBackground.jpeg";
 import styles from "./index.module.css";
+import Desktop from "../Desktop";
 
 const OS = () => {
     
@@ -23,6 +24,7 @@ const OS = () => {
                 backgroundSize: "cover"
             }}
         >
+            <Desktop/>
             {apps?.map((app) => !app.hidden && (
                 <Window
                     key={app.id}
