@@ -59,21 +59,21 @@ export const useAppsStore = create<AppsState>((set) => ({
         })
     ),
     apps: [
-        {
-            id: 0,
-            x: 100,
-            y: 100,
-            hidden: false,
-            title: "Janela 1",
-            type: AppTypes.Folder
-        },
-        {
-            id: 1,
-            x: 100,
-            y: 100,
-            hidden: false,
-            title: "Janela 2",
-            type: AppTypes.Folder
-        },
+        // {
+        //     id: 0,
+        //     x: 100,
+        //     y: 100,
+        //     hidden: false,
+        //     title: "Janela 1",
+        //     type: AppTypes.Folder
+        // },
+        // {
+        //     id: 1,
+        //     x: 100,
+        //     y: 100,
+        //     hidden: false,
+        //     title: "Janela 2",
+        //     type: AppTypes.Folder
+        // },
     ]
 }));
