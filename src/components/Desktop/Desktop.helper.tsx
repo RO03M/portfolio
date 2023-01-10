@@ -13,16 +13,14 @@ export const makeArrayStep = (value: number, totalSteps: number) : number[] => {
 }
 
 export const getGridSize = () => {
-    const minXGridCount = 10;
-    const minYGridCount = 5;
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
+    const minGridWidth = 150;
+    const minGridHeight = 140;
 
-    const xGridCount = windowWidth / minXGridCount;
-    const yGridCount = windowHeight / minYGridCount;
+    const gridWidth = window.innerWidth / Math.floor(window.innerWidth / minGridWidth);
+    const gridHeight = window.innerHeight / Math.floor(window.innerHeight / minGridHeight);
 
     return {
-        width: Math.floor(xGridCount),
-        height: Math.floor(yGridCount)
+        width: gridWidth,
+        height: gridHeight
     };
 }

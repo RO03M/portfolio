@@ -46,9 +46,8 @@ export const Window = (props: IWindow) => {
     const debugMode = useOSStore((store) => store.debugMode);
 
     return (
-        <Box
+        <motion.div
             id={`${appId}-window`}
-            component={motion.div}
             style={{
                 width: width,
                 height: height,
@@ -62,6 +61,15 @@ export const Window = (props: IWindow) => {
             dragControls={dragControls}
             dragTransition={{
                 power: 0
+            }}
+            initial={{
+                scale: .6
+            }}
+            animate={{
+                scale: 1
+            }}
+            exit={{
+                scale: 0
             }}
         >
             <Box
@@ -79,8 +87,6 @@ export const Window = (props: IWindow) => {
                 dragMomentum={false}
                 dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                 onDrag={handleBottomDrag}
-                // onDragStart={() => setIsDragging(true)}
-                // onDragEnd={() => setIsDragging(false)}
             />
             <Box
                 component={motion.div}
@@ -97,8 +103,6 @@ export const Window = (props: IWindow) => {
                 dragMomentum={false}
                 dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                 onDrag={handleRightDrag}
-                // onDragStart={() => setIsDragging(true)}
-                // onDragEnd={() => setIsDragging(false)}
             />
             <Box
                 component={motion.div}
@@ -115,8 +119,6 @@ export const Window = (props: IWindow) => {
                 dragMomentum={false}
                 dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                 onDrag={handleLeftDrag}
-                // onDragStart={() => setIsDragging(true)}
-                // onDragEnd={() => setIsDragging(false)}
             />
             <Box
                 component={motion.div}
@@ -133,8 +135,6 @@ export const Window = (props: IWindow) => {
                 dragMomentum={false}
                 dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                 onDrag={handleTopDrag}
-                // onDragStart={() => setIsDragging(true)}
-                // onDragEnd={() => setIsDragging(false)}
             />
             <Box
                 component={motion.div}
@@ -153,8 +153,6 @@ export const Window = (props: IWindow) => {
                 dragMomentum={false}
                 dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                 onDrag={handleTopLeftDrag}
-                // onDragStart={() => setIsDragging(true)}
-                // onDragEnd={() => setIsDragging(false)}
             />
             <Box
                 component={motion.div}
@@ -173,8 +171,6 @@ export const Window = (props: IWindow) => {
                 dragMomentum={false}
                 dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                 onDrag={handleTopRightDrag}
-                // onDragStart={() => setIsDragging(true)}
-                // onDragEnd={() => setIsDragging(false)}
             />
             <Box
                 component={motion.div}
@@ -193,8 +189,6 @@ export const Window = (props: IWindow) => {
                 dragMomentum={false}
                 dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                 onDrag={handleBottomRightDrag}
-                // onDragStart={() => setIsDragging(true)}
-                // onDragEnd={() => setIsDragging(false)}
             />
             <Box
                 component={motion.div}
@@ -213,8 +207,6 @@ export const Window = (props: IWindow) => {
                 dragMomentum={false}
                 dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
                 onDrag={handleBottomLeftDrag}
-                // onDragStart={() => setIsDragging(true)}
-                // onDragEnd={() => setIsDragging(false)}
             />
             <Topbar
                 onPointerDown={startDrag}
@@ -225,6 +217,6 @@ export const Window = (props: IWindow) => {
                     height: "calc(100% - 25px)"
                 }}
             />
-        </Box>
+        </motion.div>
     );
 }

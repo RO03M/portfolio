@@ -1,4 +1,5 @@
-import { styled } from "@mui/system";
+import { useTheme } from "@mui/material";
+import { alpha, styled } from "@mui/system";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 import { closest, closestCeil, closestFloor } from "../../helpers/closest";
@@ -24,6 +25,8 @@ const Item = (props: ItemProps) => {
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     
+    const theme = useTheme();
+
     const x = useMotionValue(100);
     const y = useMotionValue(100);
     const xPlaceholder = useMotionValue(100);
@@ -61,9 +64,12 @@ const Item = (props: ItemProps) => {
                             y: yPlaceholder,
                             width: gridWidth,
                             height: gridHeight,
-                            backgroundColor: "orange",
                             position: "absolute",
-                            borderRadius: 5
+                            backgroundColor: alpha(theme.palette.primary.main, .2),
+                            borderRadius: "16px",
+                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                            backdropFilter: "blur(7px)",
+                            border: "1px solid rgba(255, 255, 255, 0.03)",
                         }}
                     />
                 )}
@@ -72,7 +78,7 @@ const Item = (props: ItemProps) => {
                 style={{
                     width: itemWidth,
                     height: itemHeight,
-                    backgroundColor: "red",
+                    backgroundColor: "white",
                     borderRadius: "5px",
                     x,
                     y
@@ -81,6 +87,12 @@ const Item = (props: ItemProps) => {
                 dragTransition={{
                     power: 0
                 }}
+                whileHover={{
+                    scale: 1.1
+                }}
+                whileTap={{
+                    scale: 0.9
+                }}
                 onDragStart={() => setIsDragging(true)}
                 onDragEnd={() => setIsDragging(false)}
                 onDrag={() => {
@@ -88,6 +100,18 @@ const Item = (props: ItemProps) => {
                     yPlaceholder.set(closestFloor(y.get(), heightSteps));
                 }}
             />
+            <motion.div
+                style={{
+                    x,
+                    y,
+                    color: "white",
+                    width: 50,
+                    textAlign: "center",
+                    userSelect: "none"
+                }}
+            >
+                <p contentEditable>Please shut the fuck up</p>
+            </motion.div>
         </>
     );
 }

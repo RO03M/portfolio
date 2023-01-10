@@ -21,29 +21,26 @@ const Desktop = () => {
     } = getGridSize();
 
     return (
-        <>
-            {/* <DesktopDebugGrid/> */}
-            <Box
-                sx={{
-                    width: "100%",
-                    height: "100%"
-                }}
-            >
-                {(() => {
-                    const widthSteps = makeArrayStep(windowWidth, windowWidth / gridWidth);
-                    const heightSteps = makeArrayStep(windowHeight, windowHeight / gridHeight);
-                    return new Array(1).fill(undefined).map((_, key) => (
-                        <Item
-                            key={key}
-                            widthSteps={widthSteps}
-                            heightSteps={heightSteps}
-                            gridWidth={gridWidth}
-                            gridHeight={gridHeight}
-                        />
-                    ))
-                })()}
-            </Box>
-        </>
+        <Box
+            sx={{
+                width: "100%",
+                height: "100%"
+            }}
+        >
+            {(() => {
+                const widthSteps = makeArrayStep(windowWidth, windowWidth / gridWidth);
+                const heightSteps = makeArrayStep(windowHeight, windowHeight / gridHeight);
+                return new Array(1).fill(undefined).map((_, key) => (
+                    <Item
+                        key={key}
+                        widthSteps={widthSteps}
+                        heightSteps={heightSteps}
+                        gridWidth={gridWidth}
+                        gridHeight={gridHeight}
+                    />
+                ))
+            })()}
+        </Box>
     );
 }
 

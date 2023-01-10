@@ -7,6 +7,7 @@ import { useAppsStore } from "../../stores/apps";
 import mainBackground from "../../assets/images/mainBackground.jpeg";
 import styles from "./index.module.css";
 import Desktop from "../Desktop";
+import { AnimatePresence } from "framer-motion";
 
 const OS = () => {
     
@@ -25,16 +26,18 @@ const OS = () => {
             }}
         >
             <Desktop/>
-            {apps?.map((app) => !app.hidden && (
-                <Window
-                    key={app.id}
-                    osRef={osRef}
-                    x={app.x}
-                    y={app.y}
-                    appId={app.id}
-                    data-hidden={app.hidden}
-                />
-            ))}
+            <AnimatePresence>
+                {apps?.map((app) => !app.hidden && (
+                    <Window
+                        key={app.id}
+                        osRef={osRef}
+                        x={app.x}
+                        y={app.y}
+                        appId={app.id}
+                        data-hidden={app.hidden}
+                    />
+                ))}
+            </AnimatePresence>
             <Dock/>
         </Box>
     );

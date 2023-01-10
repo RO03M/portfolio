@@ -20,6 +20,7 @@ interface AppsState {
     updateWindow: (id: number, configs: Partial<App>) => void;
     toggleWindowVisibility: (appId: number, hidden?: boolean) => void;
     closeWindow: (appId: number) => void;
+    setApps: (apps: App[]) => void;
 }
 
 export const useAppsStore = create<AppsState>((set) => ({
@@ -58,22 +59,27 @@ export const useAppsStore = create<AppsState>((set) => ({
             };
         })
     ),
+    setApps: (apps: App[]) => (
+        set((state) => ({
+            apps: [...apps]
+        }))
+    ),
     apps: [
-        // {
-        //     id: 0,
-        //     x: 100,
-        //     y: 100,
-        //     hidden: false,
-        //     title: "Janela 1",
-        //     type: AppTypes.Folder
-        // },
-        // {
-        //     id: 1,
-        //     x: 100,
-        //     y: 100,
-        //     hidden: false,
-        //     title: "Janela 2",
-        //     type: AppTypes.Folder
-        // },
+        {
+            id: 0,
+            x: 100,
+            y: 100,
+            hidden: false,
+            title: "Janela 1",
+            type: AppTypes.Folder
+        },
+        {
+            id: 1,
+            x: 100,
+            y: 100,
+            hidden: false,
+            title: "Janela 2",
+            type: AppTypes.Folder
+        },
     ]
 }));

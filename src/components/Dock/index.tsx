@@ -1,13 +1,10 @@
 import { Box, ButtonBase, Divider, IconButton } from "@mui/material";
 
 import AppsIcon from '@mui/icons-material/Apps';
-import { useRenderApps } from "./useRenderApps";
+import { DockApps } from "./DockApps";
+import { Reorder } from "framer-motion";
 
 export const Dock = () => {
-
-    const {
-        renderApps
-    } = useRenderApps();
 
     return (
         <Box
@@ -39,9 +36,7 @@ export const Dock = () => {
                 variant={"middle"}
                 flexItem
             />
-            <Box>
-                {renderApps()}
-            </Box>
+            <DockApps/>
         </Box>
     );
 }
