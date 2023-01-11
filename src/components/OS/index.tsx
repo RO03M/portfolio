@@ -1,6 +1,6 @@
-import { Box, Paper } from "@mui/material";
+import { Box, Menu, MenuItem, MenuList, Paper, Popover } from "@mui/material";
 import { Window } from "../Window";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Dock } from "../Dock";
 import { useAppsStore } from "../../stores/apps";
 
@@ -10,10 +10,14 @@ import Desktop from "../Desktop";
 import { AnimatePresence } from "framer-motion";
 
 const OS = () => {
-    
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
     const osRef = useRef<HTMLDivElement>(null);
     const apps = useAppsStore((store) => store.apps);
-    
+
+    useEffect(() => setAnchorEl(osRef.current), []);
+
     return (
         <Box
             className={styles.os}
@@ -24,6 +28,7 @@ const OS = () => {
                 backgroundImage: `url(${mainBackground})`,
                 backgroundSize: "cover"
             }}
+            onContextMenu={() => console.log("teste")}
         >
             <Desktop/>
             <AnimatePresence>
@@ -39,6 +44,25 @@ const OS = () => {
                 ))}
             </AnimatePresence>
             <Dock/>
+            <Popover
+                anchorReference={"anchorPosition"}
+                anchorPosition={{ top: 0, left: 1090 }}
+                open={true}
+            >
+                <MenuList>
+                    <MenuItem>Item 1</MenuItem>
+                    <MenuItem>Item 2</MenuItem>
+                    <MenuItem>Item 3</MenuItem>
+                </MenuList>
+            </Popover>
+            {/* {osRef.current !== null && (
+                <Menu
+                    open={true}
+                    anchorEl={anchorEl}
+                >
+                    <MenuItem>teste</MenuItem>
+                </Menu>
+            )} */}
         </Box>
     );
 }

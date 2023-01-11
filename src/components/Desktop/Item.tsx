@@ -47,17 +47,20 @@ const Item = (props: ItemProps) => {
                 {isDragging && (
                     <motion.div
                         initial={{
-                            opacity: 0
+                            opacity: 0,
+                            scale: 0.95
                         }}
                         animate={{
-                            opacity: 1
+                            opacity: 1,
+                            scale: 1
                         }}
                         exit={{
-                            opacity: 0
+                            opacity: 0,
+                            scale: 0.9
                         }}
                         transition={{
                             x: { duration: 10 },
-                            opacity: { duration: .1 }
+                            opacity: { duration: .2 }
                         }}
                         style={{
                             x: xPlaceholder,
@@ -110,7 +113,7 @@ const Item = (props: ItemProps) => {
                     userSelect: "none"
                 }}
             >
-                <p contentEditable>Please shut the fuck up</p>
+                {/* <p contentEditable>Please shut the fuck up</p> */}
             </motion.div>
         </>
     );
