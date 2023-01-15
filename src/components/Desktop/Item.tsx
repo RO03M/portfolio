@@ -1,7 +1,7 @@
 import { useTheme } from "@mui/material";
 import { alpha, styled } from "@mui/system";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { closest, closestCeil, closestFloor } from "../../helpers/closest";
 
 interface ItemProps {
@@ -31,7 +31,8 @@ const Item = (props: ItemProps) => {
     const y = useMotionValue(100);
     const xPlaceholder = useMotionValue(100);
     const yPlaceholder = useMotionValue(100);
-    
+    const id = useId();
+
     useEffect(() => {
         if (!isDragging && widthSteps && heightSteps) {
             const xItem = closestFloor(x.get(), widthSteps) + (gridWidth * 0.5 - itemWidth * 0.5);
@@ -104,6 +105,7 @@ const Item = (props: ItemProps) => {
                 }}
             />
             <motion.div
+                id={id}
                 style={{
                     x,
                     y,

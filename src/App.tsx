@@ -1,5 +1,6 @@
 import { createTheme, ThemeProvider } from "@mui/material"
 import { useOSStore } from "./stores";
+import PlaceholderApp from "./components/Apps/Placeholder/PlaceholderApp";
 import OS from "./components/OS";
 
 import "./index.css";
@@ -12,7 +13,7 @@ const App = () => {
 	const toggleDebug = useOSStore((store) => store.toggleDebug);
 
 	useHotkeys("shift+d", toggleDebug);
-
+	console.log(PlaceholderApp.getType());
 	return (
 		<ThemeProvider
 			theme={theme}

@@ -44,25 +44,6 @@ const OS = () => {
                 ))}
             </AnimatePresence>
             <Dock/>
-            <Popover
-                anchorReference={"anchorPosition"}
-                anchorPosition={{ top: 0, left: 1090 }}
-                open={true}
-            >
-                <MenuList>
-                    <MenuItem>Item 1</MenuItem>
-                    <MenuItem>Item 2</MenuItem>
-                    <MenuItem>Item 3</MenuItem>
-                </MenuList>
-            </Popover>
-            {/* {osRef.current !== null && (
-                <Menu
-                    open={true}
-                    anchorEl={anchorEl}
-                >
-                    <MenuItem>teste</MenuItem>
-                </Menu>
-            )} */}
         </Box>
     );
 }

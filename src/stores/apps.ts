@@ -1,9 +1,5 @@
 import create from "zustand";
-
-export enum AppTypes {
-    Folder,
-    TextEditor
-}
+import { AppTypes } from "../components/Apps/appTypes";
 
 interface App {
     id: number;

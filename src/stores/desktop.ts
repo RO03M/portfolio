@@ -1,5 +1,5 @@
 import create from "zustand";
-import { AppTypes } from "./apps";
+import { AppTypes } from "../components/Apps/appTypes";
 
 interface DesktopItem {
     id: number;
