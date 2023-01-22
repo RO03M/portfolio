@@ -13,7 +13,7 @@ const App = () => {
 	const toggleDebug = useOSStore((store) => store.toggleDebug);
 
 	useHotkeys("shift+d", toggleDebug);
-	console.log(PlaceholderApp.getType());
+	
 	return (
 		<ThemeProvider
 			theme={theme}

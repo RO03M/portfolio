@@ -40,6 +40,7 @@ const OS = () => {
                         y={app.y}
                         appId={app.id}
                         data-hidden={app.hidden}
+                        AppComponent={app.component}
                     />
                 ))}
             </AnimatePresence>

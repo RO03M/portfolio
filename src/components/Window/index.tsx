@@ -1,8 +1,8 @@
-import { Box, Paper } from "@mui/material";
-import { motion, useDragControls, useMotionValue } from "framer-motion";
-import { PointerEvent, RefObject, useCallback, useEffect, useId, useRef, useState } from "react";
+import { Box } from "@mui/material";
+import { motion, useDragControls } from "framer-motion";
+import { PointerEvent, RefObject, useCallback, useState } from "react";
 import { useOSStore } from "../../stores";
-import { Resizable } from "../Resizable";
+import Content from "./Content";
 import { Topbar } from "./Topbar";
 import { useWindow } from "./useWindow";
 
@@ -10,12 +10,14 @@ interface IWindow {
     osRef: RefObject<HTMLDivElement>;
     x: number;
     y: number;
-    appId: number;
+    appId: string;
+    AppComponent: () => JSX.Element;
 }
 
 export const Window = (props: IWindow) => {
 
     const {
+        AppComponent,
         osRef,
         x,
         y,
@@ -212,11 +214,9 @@ export const Window = (props: IWindow) => {
                 onPointerDown={startDrag}
                 appId={appId}
             />
-            <Paper
-                sx={{
-                    height: "calc(100% - 25px)"
-                }}
-            />
+            <Content>
+                <AppComponent/>
+            </Content>
         </motion.div>
     );
 }

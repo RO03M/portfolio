@@ -1,26 +1,33 @@
 import create from "zustand";
-import { AppTypes } from "../components/Apps/appTypes";
+import randomstring from "randomstring";
+
+export enum AppTypes {
+    Folder,
+    TextEditor,
+    Placeholder
+}
 
 interface App {
-    id: number;
+    id: string;
     x: number;
     y: number;
     title: string;
     hidden: boolean;
-    type: AppTypes;
+    component: () => JSX.Element;
 }
 
 
 interface AppsState {
     apps: App[];
-    updateWindow: (id: number, configs: Partial<App>) => void;
-    toggleWindowVisibility: (appId: number, hidden?: boolean) => void;
-    closeWindow: (appId: number) => void;
+    updateWindow: (id: string, configs: Partial<App>) => void;
+    toggleWindowVisibility: (appId: string, hidden?: boolean) => void;
+    closeWindow: (appId: string) => void;
     setApps: (apps: App[]) => void;
+    openApp: (component: () => JSX.Element) => void;
 }
 
 export const useAppsStore = create<AppsState>((set) => ({
-    updateWindow: (id: number, configs: Partial<App>) => (
+    updateWindow: (id: string, configs: Partial<App>) => (
         set((state) => {
             const tempApps = state.apps;
             const appIndex = tempApps?.findIndex((x) => x?.id === id);
@@ -34,7 +41,7 @@ export const useAppsStore = create<AppsState>((set) => ({
             };
         })
     ),
-    toggleWindowVisibility: (appId: number, hidden?: boolean) => (
+    toggleWindowVisibility: (appId: string, hidden?: boolean) => (
         set((state) => {
             const appIndex = state.apps.findIndex(app => app.id === appId);
             const tempApps = state.apps
@@ -46,7 +53,7 @@ export const useAppsStore = create<AppsState>((set) => ({
             }
         })
     ),
-    closeWindow: (appId: number) => (
+    closeWindow: (appId: string) => (
         set((state) => {
             const tempApps = state.apps.filter(app => app.id !== appId);
             
@@ -60,22 +67,21 @@ export const useAppsStore = create<AppsState>((set) => ({
             apps: [...apps]
         }))
     ),
-    apps: [
-        {
-            id: 0,
-            x: 100,
-            y: 100,
-            hidden: false,
-            title: "Janela 1",
-            type: AppTypes.Folder
-        },
-        {
-            id: 1,
-            x: 100,
-            y: 100,
-            hidden: false,
-            title: "Janela 2",
-            type: AppTypes.Folder
-        },
-    ]
+    openApp: (component: () => JSX.Element) => (
+        set((state) => {
+            const newApp = {
+                id: randomstring.generate(8),
+                x: 0,
+                y: 0,
+                hidden: false,
+                title: "meta test",
+                component
+            };
+
+            return {
+                apps: [...state.apps, newApp]
+            };
+        })
+    ),
+    apps: []
 }));

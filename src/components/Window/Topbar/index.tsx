@@ -10,7 +10,7 @@ import { useAppsStore } from "../../../stores/apps";
 
 interface TopbarProp {
     onPointerDown: React.PointerEventHandler<HTMLDivElement>;
-    appId: number;
+    appId: string;
 }
 
 export const Topbar = (props: TopbarProp) => {
@@ -38,9 +38,11 @@ export const Topbar = (props: TopbarProp) => {
             sx={{
                 width: "100%",
                 height: 25,
-                backgroundColor: "primary.main",
+                backgroundColor: "background.default",
+                color: "text.primary",
                 display: "flex",
                 justifyContent: "flex-end",
+                borderRadius: "4px 4px 0 0"
             }}
             onMouseDown={() => document.body.style.cursor = "grabbing"}
             {...others}
@@ -60,14 +62,14 @@ export const Topbar = (props: TopbarProp) => {
                 <ButtonBase onClick={() => handleMinimizeClick(appId)}>
                     <HorizontalRuleSharpIcon
                         sx={{
-                            color: "black"
+                            color: "text.primary"
                         }}
                     />
                 </ButtonBase>
                 <ButtonBase>
                     <CropSquareSharpIcon
                         sx={{
-                            color: "black"
+                            color: "text.primary"
                         }}
                     />
                 </ButtonBase>
@@ -76,7 +78,7 @@ export const Topbar = (props: TopbarProp) => {
                 >
                     <CloseIcon
                         sx={{
-                            color: "black"
+                            color: "text.primary"
                         }}
                     />
                 </ButtonBase>

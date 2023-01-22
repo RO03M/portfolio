@@ -7,9 +7,9 @@ export const useTopbar = () => {
         toggleWindowVisibility
     } = useAppsStore((store) => store);
 
-    const handleCloseClick = (appId: number) => closeWindow(appId);
+    const handleCloseClick = (appId: string) => closeWindow(appId);
 
-    const handleMinimizeClick = (appId: number) => toggleWindowVisibility(appId, true);
+    const handleMinimizeClick = (appId: string) => toggleWindowVisibility(appId, true);
 
     return {
         handleCloseClick,
