@@ -1,12 +1,20 @@
 import { createTheme, ThemeProvider } from "@mui/material"
 import { useOSStore } from "./stores";
-import PlaceholderApp from "./components/Apps/Placeholder/PlaceholderApp";
-import OS from "./components/OS";
-
-import "./index.css";
 import { useHotkeys } from "react-hotkeys-hook";
+import { AnimatePresence } from "framer-motion";
+import "./index.css";
+import React, { Suspense, useEffect, useState } from "react";
+import BootScreen from "./components/Boot/BootScreen";
+
+const OSLoadingScreen = React.lazy(() => import("./components/Boot/OSLoadingScreen"));
+const HomeScreen = React.lazy(() => import("./components/Boot/HomeScreen"));
+const OS = React.lazy(() => import("./components/OS"));
 
 const App = () => {
+
+	const [timer, setTimer] = useState<number>(0);
+	const [loaded, setLoaded] = useState<boolean>(false);
+	const [homeScreen, setHomeScreen] = useState<boolean>(true);
 
 	const theme = createTheme(useOSStore((store) => store.theme));
 
@@ -14,11 +22,28 @@ const App = () => {
 
 	useHotkeys("shift+d", toggleDebug);
 	
+	useEffect(() => {
+		const interval = setInterval(() => setTimer((prev) => prev < 60 ? prev + 1 : prev), 1000);
+
+		return () => clearInterval(interval);
+	}, []);
+
 	return (
 		<ThemeProvider
 			theme={theme}
 		>
-			<OS/>
+			{timer < 6 && (<BootScreen/>)}
+			<Suspense fallback={<div>Loading</div>}>
+				<AnimatePresence>
+					{(timer >= 6 && !loaded) && (<OSLoadingScreen setLoaded={setLoaded}/>)}
+					{loaded && homeScreen && (
+						<HomeScreen
+							onSignIn={() => setHomeScreen(false)}
+						/>
+					)}
+				</AnimatePresence>
+				<OS/>
+			</Suspense>
 		</ThemeProvider>
 	);
 }

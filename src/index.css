@@ -8,3 +8,8 @@ html, body, #root {
 	max-height: 100%;
 	overflow: hidden;
 }
+
+@font-face {
+	font-family: "BootFont";
+	src: local("gbb__"), url("./assets/fonts/gbb__.ttf") format("truetype");
+}
