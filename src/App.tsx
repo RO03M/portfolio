@@ -27,15 +27,15 @@ const App = () => {
 
 		return () => clearInterval(interval);
 	}, []);
-
+	
 	return (
 		<ThemeProvider
 			theme={theme}
 		>
-			{timer < 6 && (<BootScreen/>)}
-			<Suspense fallback={<div>Loading</div>}>
+			{timer < 6 && !sessionStorage.getItem("visitedInThisSession") && (<BootScreen/>)}
+			<Suspense>
 				<AnimatePresence>
-					{(timer >= 6 && !loaded) && (<OSLoadingScreen setLoaded={setLoaded}/>)}
+					{(timer >= 6 && !loaded && !sessionStorage.getItem("visitedInThisSession")) && (<OSLoadingScreen setLoaded={setLoaded}/>)}
 					{loaded && homeScreen && (
 						<HomeScreen
 							onSignIn={() => setHomeScreen(false)}

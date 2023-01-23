@@ -3,8 +3,8 @@ import { clamp } from "../../helpers/clamp";
 
 export const useWindow = () => {
 
-    const [height, setHeight] = useState<number>(200);
-    const [width, setWidth] = useState<number>(200);
+    const [height, setHeight] = useState<number>(600);
+    const [width, setWidth] = useState<number>(800);
     const [top, setTop] = useState<number>(0);
     const [left, setLeft] = useState<number>(0);
     const resizeBarWidth = 10;

@@ -23,7 +23,10 @@ const OSLoadingScreen = (props: Props) => {
     }
 
     useEffect(() => {
-        if (progress >= 100) setLoaded(true);
+        if (progress >= 100) {
+            sessionStorage.setItem("visitedInThisSession", "true");
+            setLoaded(true);
+        }
     }, [progress]);
 
     useEffect(() => {

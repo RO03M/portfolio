@@ -1,5 +1,6 @@
 import React from "react";
 import create from "zustand";
+import { BrowserApp } from "../../components/Apps/apps";
 import PlaceholderApp from "../../components/Apps/PlaceholderApp";
 
 interface Item {
@@ -41,8 +42,8 @@ export const useItemsStore = create<ItemsState>((set, get) => ({
             id: 1,
             gridX: 0,
             gridY: 0,
-            title: "item",
-            appComponent: PlaceholderApp
+            title: "Browser",
+            appComponent: BrowserApp
         },
         {
             id: 2,
