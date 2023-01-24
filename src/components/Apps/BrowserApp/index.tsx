@@ -1,8 +1,14 @@
 import { Box } from "@mui/material";
+import { useState } from "react";
 import IFrameApp from "../IFrameApp";
 import Topbar from "./Topbar";
 
 const BrowserApp = () => {
+
+    const [search, setSearch] = useState<string>("https://www.google.com/webhp?igu=1");
+
+    const onSearchConfirm = (value: string) => setSearch(value);
+    
     return (
         <Box
             sx={{
@@ -10,10 +16,12 @@ const BrowserApp = () => {
                 height: "100%"
             }}
         >
-            <Topbar/>
-            {/* <IFrameApp
-                src={"https://www.google.com/webhp?igu=1"}
-            /> */}
+            <Topbar
+                onSearchConfirm={onSearchConfirm}
+            />
+            <IFrameApp
+                src={search}
+            />
         </Box>
     );
 }

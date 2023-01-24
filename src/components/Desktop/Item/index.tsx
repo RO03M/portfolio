@@ -8,6 +8,8 @@ import { useItemsStore } from "../../../stores/items/items";
 
 interface ItemProps {
     id: number;
+    title: string;
+    icon?: string;
     widthSteps: number[];
     heightSteps: number[];
     gridWidth: number;
@@ -24,6 +26,8 @@ const Item = (props: ItemProps) => {
     
     const {
         id,
+        title,
+        icon,
         widthSteps,
         heightSteps,
         gridWidth,
@@ -80,7 +84,7 @@ const Item = (props: ItemProps) => {
     return (
         <div
             id={`draggable-item-${id}`}
-            onDoubleClick={() => openApp(component)}
+            onDoubleClick={() => openApp(component, title)}
         >
             <AnimatePresence>
                 {isDragging && (
@@ -121,7 +125,8 @@ const Item = (props: ItemProps) => {
                     position: "absolute",
                     width: itemWidth,
                     height: itemHeight,
-                    backgroundColor: "white",
+                    ...(icon ? {backgroundImage: `url(${icon})`} : {backgroundColor: "white"}),
+                    backgroundSize: "cover",
                     borderRadius: "5px",
                     x: x,
                     y: y
@@ -166,10 +171,12 @@ const Item = (props: ItemProps) => {
                     color: "white",
                     width: 50,
                     textAlign: "center",
-                    userSelect: "none"
+                    userSelect: "none",
+                    position: "absolute",
+                    marginTop: "3.5em"
                 }}
             >
-                {/* <p contentEditable>Please shut the fuck up</p> */}
+                <p>{title}</p>
             </motion.div>
         </div>
     );

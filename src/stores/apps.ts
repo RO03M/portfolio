@@ -23,7 +23,7 @@ interface AppsState {
     toggleWindowVisibility: (appId: string, hidden?: boolean) => void;
     closeWindow: (appId: string) => void;
     setApps: (apps: App[]) => void;
-    openApp: (component: () => JSX.Element) => void;
+    openApp: (component: () => JSX.Element, title: string) => void;
 }
 
 export const useAppsStore = create<AppsState>((set) => ({
@@ -67,14 +67,14 @@ export const useAppsStore = create<AppsState>((set) => ({
             apps: [...apps]
         }))
     ),
-    openApp: (component: () => JSX.Element) => (
+    openApp: (component: () => JSX.Element, title: string) => (
         set((state) => {
             const newApp = {
                 id: randomstring.generate(8),
                 x: 0,
                 y: 0,
                 hidden: false,
-                title: "meta test",
+                title: title,
                 component
             };
 

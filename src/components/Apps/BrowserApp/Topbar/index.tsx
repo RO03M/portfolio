@@ -6,8 +6,24 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Tab from "./Tab";
 import { grey } from "@mui/material/colors";
+import { useState } from "react";
 
-const Topbar = () => {
+interface Props {
+    onSearchConfirm: (value: string) => void;
+}
+
+const Topbar = (props: Props) => {
+
+    const {
+        onSearchConfirm
+    } = props;
+
+    const [search, setSearch] = useState<string>("");
+
+    const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => setSearch(event.currentTarget.value);
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => event.key === "Enter" && onSearchConfirm(search);
+
     return (
         <Box
             sx={{
@@ -34,8 +50,10 @@ const Topbar = () => {
                     <RefreshIcon/>
                 </IconButton>
                 <InputBase
-                    defaultValue={"url link"}
-                    placeholder={"Search Google or type a URL"}
+                    value={search}
+                    onChange={onSearch}
+                    onKeyDown={handleKeyDown}
+                    placeholder={"Search Browser or type a URL"}
                     sx={{
                         backgroundColor: grey[900],
                         margin: 0.3,

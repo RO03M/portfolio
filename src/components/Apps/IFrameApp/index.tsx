@@ -20,6 +20,9 @@ const IFrameApp = (props: Props) => {
                 src={src}
                 width={"100%"}
                 height={"100%"}
+                style={{
+                    border: "none"
+                }}
             />
         </div>
     ) : null;

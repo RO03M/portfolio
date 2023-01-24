@@ -3,8 +3,11 @@ import create from "zustand";
 import { BrowserApp } from "../../components/Apps/apps";
 import PlaceholderApp from "../../components/Apps/PlaceholderApp";
 
+import { chrome } from "../../components/Apps/assets/icons/icons";
+
 interface Item {
     id: number;
+    icon?: string;
     gridX: number;
     gridY: number;
     title: string;
@@ -40,9 +43,10 @@ export const useItemsStore = create<ItemsState>((set, get) => ({
     items: [
         {
             id: 1,
+            icon: chrome,
             gridX: 0,
             gridY: 0,
-            title: "Browser",
+            title: "Google Chrome",
             appComponent: BrowserApp
         },
         {

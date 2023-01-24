@@ -32,6 +32,8 @@ const Desktop = () => {
                     <Item
                         id={item.id}
                         key={item.id}
+                        icon={item.icon}
+                        title={item.title}
                         component={item.appComponent}
                         widthSteps={widthSteps}
                         heightSteps={heightSteps}
