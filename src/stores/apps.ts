@@ -1,6 +1,8 @@
 import create from "zustand";
 import randomstring from "randomstring";
 
+//TODO need to determine the name, is it window or fucking app?
+
 export enum AppTypes {
     Folder,
     TextEditor,
@@ -13,12 +15,14 @@ interface App {
     y: number;
     title: string;
     hidden: boolean;
+    maximized: boolean;
     component: () => JSX.Element;
 }
 
 
 interface AppsState {
     apps: App[];
+    getWindow: (id: string) => App | undefined;
     updateWindow: (id: string, configs: Partial<App>) => void;
     toggleWindowVisibility: (appId: string, hidden?: boolean) => void;
     closeWindow: (appId: string) => void;
@@ -26,15 +30,17 @@ interface AppsState {
     openApp: (component: () => JSX.Element, title: string) => void;
 }
 
-export const useAppsStore = create<AppsState>((set) => ({
+export const useAppsStore = create<AppsState>((set, get) => ({
+    getWindow: (id: string) => (
+        get().apps?.find((x) => x?.id === id)
+    ),
     updateWindow: (id: string, configs: Partial<App>) => (
         set((state) => {
             const tempApps = state.apps;
             const appIndex = tempApps?.findIndex((x) => x?.id === id);
-
-            if (appIndex !== undefined && configs?.x) tempApps[appIndex].x = configs.x;
-            if (appIndex !== undefined && configs?.y) tempApps[appIndex].y = configs.y;
-            if (appIndex !== undefined && configs?.hidden) tempApps[appIndex].hidden = configs.hidden;
+            if (appIndex !== undefined) {
+                tempApps[appIndex] = {...tempApps[appIndex], ...configs};
+            }
             
             return {
                 apps: [...tempApps]
@@ -73,6 +79,7 @@ export const useAppsStore = create<AppsState>((set) => ({
                 id: randomstring.generate(8),
                 x: 0,
                 y: 0,
+                maximized: false,
                 hidden: false,
                 title: title,
                 component

@@ -10,20 +10,21 @@ import { useAppsStore } from "../../../stores/apps";
 
 interface TopbarProp {
     onPointerDown: React.PointerEventHandler<HTMLDivElement>;
+    onMaximizeClick: () => void;
     appId: string;
 }
 
 export const Topbar = (props: TopbarProp) => {
+    const {
+        appId,
+        onMaximizeClick,
+        ...others
+    } = props;
 
     const {
         handleCloseClick,
         handleMinimizeClick
     } = useTopbar();
-
-    const {
-        appId,
-        ...others
-    } = props;
 
     const appProps = useAppsStore((store) => store.apps.find((app) => app.id === appId));
 
@@ -45,6 +46,7 @@ export const Topbar = (props: TopbarProp) => {
                 borderRadius: "4px 4px 0 0"
             }}
             onMouseDown={() => document.body.style.cursor = "grabbing"}
+            onDoubleClick={onMaximizeClick}
             {...others}
         >
             <Box
@@ -66,7 +68,9 @@ export const Topbar = (props: TopbarProp) => {
                         }}
                     />
                 </ButtonBase>
-                <ButtonBase>
+                <ButtonBase
+                    onClick={onMaximizeClick}
+                >
                     <CropSquareSharpIcon
                         sx={{
                             color: "text.primary"

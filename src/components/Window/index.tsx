@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { motion, useDragControls } from "framer-motion";
-import { PointerEvent, RefObject, useCallback, useState } from "react";
+import { PointerEvent, RefObject, useCallback, useEffect, useState } from "react";
 import { useOSStore } from "../../stores";
 import Content from "./Content";
 import { Topbar } from "./Topbar";
@@ -19,12 +19,14 @@ export const Window = (props: IWindow) => {
     const {
         AppComponent,
         osRef,
-        x,
-        y,
+        // x,
+        // y,
         appId
     } = props;
 
     const {
+        x,
+        y,
         width,
         height,
         top,
@@ -36,10 +38,10 @@ export const Window = (props: IWindow) => {
         handleTopLeftDrag,
         handleTopRightDrag,
         handleBottomRightDrag,
-        handleBottomLeftDrag
-    } = useWindow();
-
-    const [isDragging, setIsDragging] = useState<boolean>(false);
+        handleBottomLeftDrag,
+        handleMaximizeClick,
+        initializeWindow
+    } = useWindow(appId);
     
     const dragControls = useDragControls();
 
@@ -47,19 +49,23 @@ export const Window = (props: IWindow) => {
 
     const debugMode = useOSStore((store) => store.debugMode);
 
+    useEffect(initializeWindow, []);
+
     return (
         <motion.div
             id={`${appId}-window`}
             style={{
-                width: width,
-                height: height,
-                position: "absolute",
-                top: top,
-                left: left
+                x,
+                y,
+                width,
+                height,
+                top,
+                left,
+                position: "absolute"
             }}
             drag
             dragListener={false}
-            dragConstraints={osRef}
+            // dragConstraints={osRef}
             dragControls={dragControls}
             dragTransition={{
                 power: 0
@@ -211,6 +217,7 @@ export const Window = (props: IWindow) => {
                 onDrag={handleBottomLeftDrag}
             />
             <Topbar
+                onMaximizeClick={handleMaximizeClick}
                 onPointerDown={startDrag}
                 appId={appId}
             />
