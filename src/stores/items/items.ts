@@ -3,7 +3,8 @@ import create from "zustand";
 import { BrowserApp } from "../../components/Apps/apps";
 import PlaceholderApp from "../../components/Apps/PlaceholderApp";
 
-import { chrome } from "../../components/Apps/assets/icons/icons";
+import { chrome, setting } from "../../components/Apps/assets/icons/icons";
+import UnderConstructionApp from "../../components/Apps/UnderContructionApp";
 
 interface Item {
     id: number;
@@ -51,17 +52,11 @@ export const useItemsStore = create<ItemsState>((set, get) => ({
         },
         {
             id: 2,
+            icon: setting,
             gridX: 0,
             gridY: 1,
-            title: "item",
-            appComponent: PlaceholderApp
-        },
-        {
-            id: 3,
-            gridX: 0,
-            gridY: 2,
-            title: "item",
-            appComponent: PlaceholderApp
+            title: "Configurações",
+            appComponent: UnderConstructionApp
         },
     ]
 }));

@@ -30,7 +30,8 @@ export const DockApps = () => {
             onReorder={setApps}
             style={{
                 display: "flex",
-                listStyle: "none"
+                listStyle: "none",
+                flex: 1
             }}
         >
             {apps.map((app) => (

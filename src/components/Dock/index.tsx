@@ -3,6 +3,7 @@ import { Box, ButtonBase, Divider, IconButton } from "@mui/material";
 import AppsIcon from '@mui/icons-material/Apps';
 import { DockApps } from "./DockApps";
 import { Reorder } from "framer-motion";
+import DockRight from "./DockRight";
 
 export const Dock = () => {
 
@@ -11,8 +12,8 @@ export const Dock = () => {
             id={"main-dock"}
             sx={{
                 width: "100%",
-                height: "2em",
-                padding: 1.2,
+                height: "3em",
+                paddingLeft: 0,
                 backgroundColor: "rgba(0, 0, 0, 0.7)",
                 position: "absolute",
                 bottom: 0,
@@ -37,6 +38,7 @@ export const Dock = () => {
                 flexItem
             />
             <DockApps/>
+            <DockRight/>
         </Box>
     );
 }

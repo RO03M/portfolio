@@ -39,6 +39,17 @@ const BootScreen = () => {
                 {timer > 3 && (<span>WAIT...<br/></span>)}
                 {timer > 3.5 && (<span>INITIALIZING APP</span>)}
             </Typography>
+            <Typography
+                fontFamily={"BootFont"}
+                fontSize={24}
+                sx={{
+                    position: "absolute",
+                    right: 10,
+                    top: 10
+                }}
+            >
+                Alpha 0.0.1
+            </Typography>
         </Box>
     );
 }

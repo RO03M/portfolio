@@ -128,6 +128,9 @@ const Item = (props: ItemProps) => {
                     ...(icon ? {backgroundImage: `url(${icon})`} : {backgroundColor: "white"}),
                     backgroundSize: "cover",
                     borderRadius: "5px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                     x: x,
                     y: y
                 }}
@@ -169,14 +172,17 @@ const Item = (props: ItemProps) => {
                     x,
                     y,
                     color: "white",
-                    width: 50,
+                    width: itemWidth,
                     textAlign: "center",
                     userSelect: "none",
                     position: "absolute",
-                    marginTop: "3.5em"
+                    marginTop: "3.5em",
+                    wordBreak: "break-all"
                 }}
             >
-                <p>{title}</p>
+                <motion.p>
+                    {title}
+                </motion.p>
             </motion.div>
         </div>
     );

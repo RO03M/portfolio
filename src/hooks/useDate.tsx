@@ -46,7 +46,10 @@ const useDate = (intervalMs?: number) => {
         padHours: String(date.getHours()).padStart(2, "0"),
         month: {
             name: months[date.getMonth()],
-            value: date.getMonth()
+            padValue: String(date.getMonth() + 1).padStart(2, "0")
+        },
+        year: {
+            longValue: date.getFullYear()
         },
         padMonthDay: String(date.getDate()).padStart(2, "0"),
         weekDay: weekdays[date.getDay()]

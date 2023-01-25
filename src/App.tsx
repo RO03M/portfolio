@@ -33,6 +33,7 @@ const App = () => {
 		<ThemeProvider
 			theme={theme}
 		>
+			<BootScreen/>
 			{timer < 6 && !sessionStorage.getItem("visitedInThisSession") && (<BootScreen/>)}
 			<Suspense>
 				<AnimatePresence>
