@@ -48,7 +48,7 @@ const BootScreen = () => {
                     top: 10
                 }}
             >
-                Alpha 0.0.1
+                Alpha 0.0.2
             </Typography>
         </Box>
     );
