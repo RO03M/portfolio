@@ -57,8 +57,6 @@ export const Window = (props: IWindow) => {
             style={{
                 x,
                 y,
-                width,
-                height,
                 top,
                 left,
                 position: "absolute"
@@ -74,7 +72,9 @@ export const Window = (props: IWindow) => {
                 scale: .6
             }}
             animate={{
-                scale: 1
+                scale: 1,
+                width: width.get(),
+                height: height.get()
             }}
             exit={{
                 scale: 0

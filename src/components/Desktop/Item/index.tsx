@@ -95,19 +95,20 @@ const Item = (props: ItemProps) => {
                         }}
                         animate={{
                             opacity: 1,
-                            scale: 1
+                            scale: 1,
+                            x: xPlaceholder.get(),
+                            y: yPlaceholder.get()
                         }}
                         exit={{
                             opacity: 0,
                             scale: 0.9
                         }}
                         transition={{
-                            x: { duration: 10 },
+                            x: { duration: .08 },
+                            y: { duration: .08 },
                             opacity: { duration: .2 }
                         }}
                         style={{
-                            x: xPlaceholder,
-                            y: yPlaceholder,
                             width: gridWidth,
                             height: gridHeight,
                             position: "absolute",

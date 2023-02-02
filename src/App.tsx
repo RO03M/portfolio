@@ -23,7 +23,7 @@ const App = () => {
 	const toggleDebug = useOSStore((store) => store.toggleDebug);
 
 	useHotkeys("shift+d", toggleDebug);
-	
+
 	useEffect(() => {
 		if (sessionStorage.getItem("visitedInThisSession")) setLoaded(true);
 		const interval = setInterval(() => setTimer((prev) => prev < 60 ? prev + 1 : prev), 1000);

@@ -28,7 +28,6 @@ const OS = () => {
                 backgroundImage: `url(${mainBackground})`,
                 backgroundSize: "cover"
             }}
-            onContextMenu={() => console.log("teste")}
         >
             <Desktop/>
             <AnimatePresence>
