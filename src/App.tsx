@@ -7,6 +7,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import BootScreen from "./components/Boot/BootScreen";
 import { isMobileOrTablet } from "./helpers/isMobileOrTablet";
 import Mobile from "./components/Mobile";
+import PortfolioPage from "./portfolioPage";
 
 const OSLoadingScreen = React.lazy(() => import("./components/Boot/OSLoadingScreen"));
 const HomeScreen = React.lazy(() => import("./components/Boot/HomeScreen"));
@@ -30,13 +31,14 @@ const App = () => {
 
 		return () => clearInterval(interval);
 	}, []);
-
+	
 	if (isMobileOrTablet()) return <Mobile/>
 	
 	return (
 		<ThemeProvider
 			theme={theme}
 		>
+			{/* <PortfolioPage/> */}
 			{timer < 6 && !sessionStorage.getItem("visitedInThisSession") && (<BootScreen/>)}
 			<Suspense>
 				<AnimatePresence>

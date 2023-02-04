@@ -37,7 +37,7 @@ const BootScreen = () => {
                 {(timer > 1.5 && timer < 3) && (<span>Counting plugins...<br/></span>)}
                 {timer >= 3 && ((navigator?.plugins) ? (<span>Plugin Count: {navigator.plugins.length}<br/><br/><br/></span>) : (<span>No plugins found<br/><br/><br/></span>))}
                 {timer > 3 && (<span>WAIT...<br/></span>)}
-                {timer > 3.5 && (<span>INITIALIZING APP</span>)}
+                {timer > 3.5 && (<span>INITIALIZING WOS</span>)}
             </Typography>
             <Typography
                 fontFamily={"BootFont"}
@@ -48,7 +48,7 @@ const BootScreen = () => {
                     top: 10
                 }}
             >
-                Alpha 0.0.2
+                Alpha 0.0.14
             </Typography>
         </Box>
     );

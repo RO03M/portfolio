@@ -1,0 +1,21 @@
+{
+    "translation": {
+        "portfolio": {
+            "menu": {
+                "about": "About",
+                "experience": "Experience",
+                "projects": "Projects",
+                "contact": "Contact",
+                "resume": "Resume"
+            },
+            "content": {
+                "apresentation": {
+                    "hi": "Hi, my name is",
+                    "i-do": "I code stuff for the web",
+                    "description": "I'm a web developerwith a passion for developing in React framework. In addition to my professional projects, I also enjoy programming games when I have free time. I have a strong understanding of web technologies and am always seeking new ways to improve my work.",
+                    "checkout": "Checkout my projects!"
+                }
+            }
+        }
+    }
+}

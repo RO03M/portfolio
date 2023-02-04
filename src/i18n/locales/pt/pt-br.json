@@ -1,0 +1,21 @@
+{
+    "translation": {
+        "portfolio": {
+            "menu": {
+                "about": "Sobre",
+                "experience": "Experiência",
+                "projects": "Projetos",
+                "contact": "Contato",
+                "resume": "Currículo"
+            },
+            "content": {
+                "apresentation": {
+                    "hi": "Olá, o meu nome é",
+                    "i-do": "Eu programo coisas para a web",
+                    "description": "Eu sou um programador web com uma paixão em desenvolver aplicações em React. Além dos meus projetos profissionais, também adoro programar jogos em meu tempo livre. Tenho uma forte compreensão das tecnologias da web e estou sempre buscando novas maneiras de melhorar o meu trabalho.",
+                    "checkout": "Dê uma olhada nos meus projetos!"
+                }
+            }
+        }
+    }
+}
