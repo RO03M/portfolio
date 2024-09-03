@@ -14,15 +14,6 @@ export const DockApps = () => {
     const dockSettings = useDockSettingsStore(store => store);
     const theme = useTheme();
 
-    // const renderApps = () => {
-    //     switch (dockSettings.stackMode) {
-    //         case Stacks.AlwaysShowAll:
-    //             return renderAlwaysShowAll();
-    //         default:
-    //             return renderAlwaysShowAll();
-    //     }
-    // }
-
     return (
         <Reorder.Group
             axis={"x"}
@@ -43,9 +34,21 @@ export const DockApps = () => {
                         color={"primary"}
                         onClick={() => toggleWindowVisibility(app.id)}
                         sx={{
-                            textTransform: "none"
+                            textTransform: "none",
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: 1
                         }}
                     >
+                        <div
+                            style={{
+                                width: 15,
+                                height: 15,
+                                backgroundSize: "cover",
+                                ...(app.icon && { background: `url(${app.icon})` })
+                            }}
+                        />
                         <Typography
                             sx={{
                                 color: theme.palette.text.primary

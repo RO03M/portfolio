@@ -4,52 +4,51 @@ import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 import { closest, closestCeil, closestFloor } from "../../../helpers/closest";
 import { useAppsStore } from "../../../stores/apps";
-import { useItemsStore } from "../../../stores/items/items";
+import { DesktopItem, useItemsStore } from "../../../stores/items/items";
 
 interface ItemProps {
-    id: number;
-    title: string;
-    icon?: string;
+    item: DesktopItem;
     widthSteps: number[];
     heightSteps: number[];
     gridWidth: number;
     gridHeight: number;
-    initialGridX: number;
-    initialGridY: number;
     component: () => JSX.Element;
 }
 
-const itemWidth = 50;
-const itemHeight = 50;
+const itemWidth = 80;
+const itemHeight = 80;
 
-const Item = (props: ItemProps) => {
-    
+export function Item(props: ItemProps) {
     const {
-        id,
-        title,
-        icon,
+        item,
         widthSteps,
         heightSteps,
         gridWidth,
         gridHeight,
-        initialGridX,
-        initialGridY,
         component,
     } = props;
+
+    const {
+        id,
+        title,
+        icon,
+        gridX,
+        gridY
+    } = item;
 
     const [isDragging, setIsDragging] = useState<boolean>(false);
     const [placeholderBackground, setPlaceholderBackground] = useState<string>("transparent");
     const [[lastX, lastY], setLastPos] = useState<[number, number]>([
-        closestFloor(initialGridX * gridWidth, widthSteps) + (gridWidth * 0.5 - itemWidth * 0.5),
-        closestFloor(initialGridY * gridHeight, heightSteps) + (gridHeight * 0.5 - itemHeight * 0.5)
+        closestFloor(gridX * gridWidth, widthSteps) + (gridWidth * 0.5 - itemWidth * 0.5),
+        closestFloor(gridY * gridHeight, heightSteps) + (gridHeight * 0.5 - itemHeight * 0.5)
     ]);
 
     const theme = useTheme();
 
-    const x = useMotionValue(initialGridX * gridWidth);
-    const y = useMotionValue(initialGridY * gridHeight);
-    const xPlaceholder = useMotionValue(initialGridX * gridWidth);
-    const yPlaceholder = useMotionValue(initialGridY * gridHeight);
+    const x = useMotionValue(gridX * gridWidth);
+    const y = useMotionValue(gridY * gridHeight);
+    const xPlaceholder = useMotionValue(gridX * gridWidth);
+    const yPlaceholder = useMotionValue(gridY * gridHeight);
     
     const [
         updateItemPosition,
@@ -84,7 +83,7 @@ const Item = (props: ItemProps) => {
     return (
         <div
             id={`draggable-item-${id}`}
-            onDoubleClick={() => openApp(component, title)}
+            onDoubleClick={() => openApp(item)}
         >
             <AnimatePresence>
                 {isDragging && (
@@ -177,16 +176,19 @@ const Item = (props: ItemProps) => {
                     textAlign: "center",
                     userSelect: "none",
                     position: "absolute",
-                    marginTop: "3.5em",
-                    wordBreak: "break-all"
+                    marginTop: "5.4em",
                 }}
             >
-                <motion.p>
+                <motion.p
+                    style={{
+                        position: "absolute",
+                        left: "50%",
+                        transform: "translateX(-50%)"
+                    }}
+                >
                     {title}
                 </motion.p>
             </motion.div>
         </div>
     );
 }
-
-export default Item;

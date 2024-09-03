@@ -1,5 +1,6 @@
 import create from "zustand";
 import randomstring from "randomstring";
+import { DesktopItem } from "./items/items";
 
 //TODO need to determine the name, is it window or fucking app?
 
@@ -16,6 +17,7 @@ interface App {
     title: string;
     hidden: boolean;
     maximized: boolean;
+    icon?: string;
     component: () => JSX.Element;
 }
 
@@ -27,7 +29,7 @@ interface AppsState {
     toggleWindowVisibility: (appId: string, hidden?: boolean) => void;
     closeWindow: (appId: string) => void;
     setApps: (apps: App[]) => void;
-    openApp: (component: () => JSX.Element, title: string) => void;
+    openApp: (item: DesktopItem) => void;
 }
 
 export const useAppsStore = create<AppsState>((set, get) => ({
@@ -73,16 +75,17 @@ export const useAppsStore = create<AppsState>((set, get) => ({
             apps: [...apps]
         }))
     ),
-    openApp: (component: () => JSX.Element, title: string) => (
+    openApp: (item: DesktopItem) => (
         set((state) => {
-            const newApp = {
+            const newApp: App = {
                 id: randomstring.generate(8),
                 x: 0,
                 y: 0,
                 maximized: false,
                 hidden: false,
-                title: title,
-                component
+                title: item.title,
+                icon: item.icon,
+                component: item.appComponent
             };
 
             return {

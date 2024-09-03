@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useItemsStore } from "../../stores/items/items";
 import ContextPopover from "./ContextPopover";
 import { getGridSize, makeArrayStep } from "./Desktop.helper";
-import Item from "./Item";
+import { Item } from "./Item/item";
 import { useSelectBox } from "./useSelectBox";
 
 const Desktop = () => {
@@ -15,7 +15,7 @@ const Desktop = () => {
 
     const containerRef = useRef(null);
 
-    const items = useItemsStore((store) => store.items);
+    const { items } = useItemsStore();
 
     const selectBox = useSelectBox(containerRef);
 
@@ -28,6 +28,14 @@ const Desktop = () => {
         width: gridWidth,
         height: gridHeight
     } = getGridSize();
+
+    const widthSteps = useMemo(() => {
+        return makeArrayStep(windowWidth, windowWidth / gridWidth);
+    }, [windowWidth, gridWidth]); 
+
+    const heightSteps = useMemo(() => {
+        return makeArrayStep(windowHeight, windowHeight / gridHeight);
+    }, [windowHeight, gridHeight]);
 
     const handleContextOpen = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault();
@@ -50,37 +58,34 @@ const Desktop = () => {
         <Box
             onContextMenu={handleContextOpen}
             onClick={handleContextClose}
-            // onMouseDown={selectBox.start}
-            // onMouseMove={selectBox.onMouseMove}
-            // onMouseUp={selectBox.stop}
             ref={containerRef}
             sx={{
                 width: "100%",
                 height: "100%"
             }}
         >
-            {/* {selectBox.component} */}
             <ContextPopover
                 open={menuOpen}
                 x={menuX}
                 y={menuY}
             />
             {(() => {
-                const widthSteps = makeArrayStep(windowWidth, windowWidth / gridWidth);
-                const heightSteps = makeArrayStep(windowHeight, windowHeight / gridHeight);
+                
                 return items.map((item) => (
                     <Item
-                        id={item.id}
                         key={item.id}
-                        icon={item.icon}
-                        title={item.title}
+                        item={item}
+                        // id={item.id}
+                        // key={item.id}
+                        // icon={item.icon}
+                        // title={item.title}
                         component={item.appComponent}
                         widthSteps={widthSteps}
                         heightSteps={heightSteps}
                         gridWidth={gridWidth}
                         gridHeight={gridHeight}
-                        initialGridX={item.gridX}
-                        initialGridY={item.gridY}
+                        // initialGridX={item.gridX}
+                        // initialGridY={item.gridY}
                     />
                 ))
             })()}

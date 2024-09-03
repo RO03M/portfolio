@@ -25,7 +25,8 @@ const OS = () => {
             sx={{
                 width: "100%",
                 height: "100%",
-                backgroundImage: `url(${mainBackground})`,
+                // backgroundImage: `url(${mainBackground})`,
+                background: "linear-gradient(135deg, #08203e 0%, #557c93 100%)",
                 backgroundSize: "cover"
             }}
         >

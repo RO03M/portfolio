@@ -6,7 +6,7 @@ import PlaceholderApp from "../../components/Apps/PlaceholderApp";
 import { chrome, setting } from "../../components/Apps/assets/icons/icons";
 import UnderConstructionApp from "../../components/Apps/UnderContructionApp";
 
-interface Item {
+export interface DesktopItem {
     id: number;
     icon?: string;
     gridX: number;
@@ -16,7 +16,7 @@ interface Item {
 }
 
 interface ItemsState {
-    items: Item[];
+    items: DesktopItem[];
     updateItemPosition: (id:number, gridX: number, gridY: number) => void;
     isGridOccupied: (id: number, gridX: number, gridY: number) => boolean;
 }
